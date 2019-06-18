@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prestart":"webpack",
     "start": "node tools/distServer.js",
     "heroku-postbuild": "webpack -p",
     "dev": "webpack-dev-server -d --hot --config webpack.config.js --watch",
