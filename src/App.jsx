@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux';
 
+import {simpleAction} from './actions/simpleAction';
 
-const App = () => {
+const App = ({dispatch, ...props}) => {
     const [count,setCount]= useState(0);
 
     const handleClickPlus = function(){
@@ -11,12 +13,19 @@ const App = () => {
     const handleClickMoins = function(){
         setCount(count-1);
     }
+    const handleClickbtn = function(){
+        dispatch(simpleAction());
+    }
 
     return (<div>
         <h1>Counter: {count}</h1>
         <button onClick={handleClickPlus}>+</button>
         <button onClick={handleClickMoins}>-</button>
+        <button onClick={handleClickbtn}>SIMPLE ACTION</button>
+        <pre>{JSON.stringify(props)}</pre>
     </div>);
 };
 
-export default App;
+const mapStateToProps = state => ({...state});
+
+export default connect(mapStateToProps)(App);
