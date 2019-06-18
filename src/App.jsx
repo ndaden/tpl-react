@@ -1,31 +1,37 @@
-import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
-import {simpleAction} from './actions/simpleAction';
+import { simpleAction } from './actions/simpleAction';
 
-const App = ({dispatch, ...props}) => {
-    const [count,setCount]= useState(0);
+const App = ({ dispatch, ...props }) => {
+    const [count, setCount] = useState(0);
 
-    const handleClickPlus = function(){
-        setCount(count+1);
-    }
-    
-    const handleClickMoins = function(){
-        setCount(count-1);
-    }
-    const handleClickbtn = function(){
+    const handleClickPlus = () => {
+        setCount(count + 1);
+    };
+
+    const handleClickMoins = () => {
+        setCount(count - 1);
+    };
+
+    const handleClickbtn = () => {
         dispatch(simpleAction());
-    }
+    };
 
-    return (<div>
-        <h1>Counter: {count}</h1>
-        <button onClick={handleClickPlus}>+</button>
-        <button onClick={handleClickMoins}>-</button>
-        <button onClick={handleClickbtn}>SIMPLE ACTION</button>
-        <pre>{JSON.stringify(props)}</pre>
-    </div>);
+    return (
+        <div>
+            <h1>
+            Counter :
+            { count }
+            </h1>
+            <button onClick={handleClickPlus}>+</button>
+            <button onClick={handleClickMoins}>-</button>
+            <button onClick={handleClickbtn}>SIMPLE ACTION</button>
+            <pre>{JSON.stringify(props)}</pre>
+        </div>
+    );
 };
 
-const mapStateToProps = state => ({...state});
+const mapStateToProps = state => ({ ...state });
 
 export default connect(mapStateToProps)(App);

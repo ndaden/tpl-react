@@ -4,9 +4,9 @@ export default (state = {}, action) => {
     switch (action.type) {
         case Constants.SIMPLE_ACTION:
             return {
-                result: action.payload
-            }
+                result: action.payload,
+            };
         default:
             return state;
     }
-}
+};
