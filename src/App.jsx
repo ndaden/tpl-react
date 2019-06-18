@@ -1,9 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-const App = () => (
-    <div>
-        <h1>TOTO</h1>
-    </div>
-);
+
+const App = () => {
+    const [count,setCount]= useState(0);
+
+    const handleClickPlus = function(){
+        setCount(count+1);
+    }
+    
+    const handleClickMoins = function(){
+        setCount(count-1);
+    }
+
+    return (<div>
+        <h1>TOTO {count}</h1>
+        <button onClick={handleClickPlus}>+</button>
+        <button onClick={handleClickMoins}>-</button>
+    </div>);
+};
 
 export default App;
