@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server -d --hot --config webpack.config.js --watch",
+    "start-dev": "webpack-dev-server -d --hot --config webpack.config.js --watch",
+    "prestart":"webpack",
+    "start": "node tools/distServer.js",
     "dev": "webpack --mode=development",
     "prod": "cross-env NODE_ENV=production webpack --progress",
     "watch": "webpack --watch",
@@ -25,6 +27,7 @@
     "webpack-dev-server": "^3.7.1"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   }

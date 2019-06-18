@@ -13,7 +13,7 @@ const App = () => {
     }
 
     return (<div>
-        <h1>TOTO {count}</h1>
+        <h1>TATTA {count}</h1>
         <button onClick={handleClickPlus}>+</button>
         <button onClick={handleClickMoins}>-</button>
     </div>);
