@@ -17,7 +17,7 @@ let config = {
 				loader: "eslint-loader",
 				resolve: { extensions: [".js", ".jsx"] },
 				options: {
-					failOnError: true
+					failOnError: false 
 				}
 			},
 			{
