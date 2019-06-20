@@ -1,6 +1,7 @@
 /* eslint-disable */
 const path = require("path");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 let config = {
 	entry: "./src/index.js",
@@ -17,7 +18,7 @@ let config = {
 				loader: "eslint-loader",
 				resolve: { extensions: [".js", ".jsx"] },
 				options: {
-					failOnError: false 
+					failOnError: false
 				}
 			},
 			{
@@ -25,8 +26,29 @@ let config = {
 				exclude: /node_modules/,
 				loader: "babel-loader",
 				resolve: { extensions: [".js", ".jsx"] }
+			},
+			{
+				test: /\.scss$/,
+				use: [
+					MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader'
+					},
+					{
+						loader: 'sass-loader',
+						options: {
+							sourceMap: true,
+							// options...
+						}
+					}
+				]
 			}]
 	},
+	plugins: [
+		new MiniCssExtractPlugin({
+			filename: 'css/style.css'
+		}),
+	],
 	devServer: {
 		contentBase: path.resolve(__dirname, "./public"),
 		historyApiFallback: true,

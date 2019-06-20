@@ -6,7 +6,10 @@ import { searchPerson } from './actions/dataActions';
 
 const App = (props) => {
     const [count, setCount] = useState(0);
-    const { dispatch, person: { isSearching, person: { hits: { hits } = {} } = {} } = {} } = props;
+    const {
+        dispatch,
+        person: { isSearching, person: { hits: { hits } = {} } = {}, error: { message } = {} } = {},
+    } = props;
 
     const handleClickPlus = () => {
         setCount(count + 1);
@@ -28,21 +31,36 @@ const App = (props) => {
 
     return (
         <div>
-            <h1>
-                Counter :
-            {count}
-            </h1>
-            <p>
-                {isSearching && 'Loading ...'}
-                {hits && hits.map(hit => (
-                    JSON.stringify(hit._source.message)
-                ))}
-            </p>
-            <button onClick={handleClickPlus}>+</button>
-            <button onClick={handleClickMoins}>-</button>
-            <button onClick={handleClickbtn}>SIMPLE ACTION</button>
-            <button onClick={search}>ELASTICSEARCH</button>
-            <pre>{JSON.stringify(props)}</pre>
+            <section className="section">
+                <div className="container">
+                    <h1 className="title">Hello World</h1>
+                    <div className="columns">
+                        <div className="column">
+                            <button className="button is-primary" onClick={handleClickPlus}>+</button>
+                            <button className="button is-primary" onClick={handleClickMoins}>-</button>
+                            <button className="button is-primary" onClick={handleClickbtn}>Simple Action</button>
+                            <button className="button is-primary" onClick={search}>ElasticSearch Test</button>
+                        </div>
+                        <div className="column">
+                            <div className="notification is-primary">
+                                <button className="delete"> </button>
+                                Counter :
+                                {count}
+                                <p>
+                                    {isSearching && 'Loading ...'}
+                                    {hits && hits.map(hit => (
+                                        // eslint-disable-next-line no-underscore-dangle
+                                        JSON.stringify(hit._source.message)
+                                    ))}
+                                    {message}
+                                </p>
+                            </div>
+                        </div>
+                        <div className="column">3</div>
+                        <div className="column">4</div>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 };
