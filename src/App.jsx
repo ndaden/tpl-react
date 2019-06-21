@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Page1 from './components/Page1';
+import NavBar from './components/NavBar';
 
 const Index = () => (
     <div>
@@ -18,6 +19,7 @@ const Toto = ({ match = {} }) => (
 
 const App = () => (
     <Router>
+        <NavBar />
         <Route path="/" exact component={Index} />
         <Route path="/page1" component={Page1} />
         <Route path="/toto" exact component={Toto} />
