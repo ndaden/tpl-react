@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import simpleReducer from './simpleReducer';
-import person from './dataReducer';
+import data from './dataReducer';
 
 export default combineReducers({
     simpleReducer,
-    person,
+    data,
 });

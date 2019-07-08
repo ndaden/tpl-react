@@ -2,20 +2,17 @@ import * as Constants from '../actions/constants';
 
 export default (state = {}, action) => {
     switch (action.type) {
-        case Constants.START_SEARCH_PERSON:
+        case Constants.START_REQUEST:
             return {
-                ...state,
                 isSearching: true,
             };
-        case Constants.SEARCH_PERSON_OK:
+        case Constants.REQUEST_OK:
             return {
-                ...state,
                 isSearching: false,
-                person: action.person,
+                result: action.result,
             };
-        case Constants.SEARCH_PERSON_KO:
+        case Constants.REQUEST_KO:
             return {
-                ...state,
                 isSearching: false,
                 error: action.error,
             };

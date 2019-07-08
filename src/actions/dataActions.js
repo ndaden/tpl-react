@@ -1,27 +1,88 @@
 import * as Constants from './constants';
-import client, { ping } from '../elasticsearch/init';
+import {
+    ping,
+    search,
+    addDocument,
+    createIndex,
+    deleteAll,
+    deleteDocument,
+} from '../elasticsearch/init';
 
-const startSearchPerson = () => ({
-    type: Constants.START_SEARCH_PERSON,
+// ElasticSearch management methods
+
+const startRequest = () => ({
+    type: Constants.START_REQUEST,
 });
 
-const searchPersonOk = person => ({
-    type: Constants.SEARCH_PERSON_OK,
-    person,
+const requestOk = result => ({
+    type: Constants.REQUEST_OK,
+    result,
 });
 
-const searchPersonKo = error => ({
-    type: Constants.SEARCH_PERSON_KO,
+const requestKo = error => ({
+    type: Constants.REQUEST_KO,
     error,
 });
 
-export const searchPerson = query => (
+// API Calls
+const Ping = () => (
     (dispatch) => {
-        dispatch(startSearchPerson());
-        ping();
-
-        return client.search(query)
-            .then(body => dispatch(searchPersonOk(body)),
-                error => dispatch(searchPersonKo(error)));
+        dispatch(startRequest());
+        ping().then(body => dispatch(requestOk(body)), error => dispatch(requestKo(error)));
     }
 );
+
+const CreateIndex = indexName => (
+    (dispatch) => {
+        dispatch(startRequest());
+        createIndex(indexName)
+            .then(body => dispatch(requestOk(body)),
+                error => dispatch(requestKo(error)));
+    }
+);
+
+const CreateDocument = (indexName, _id, docType, payload) => (
+    (dispatch) => {
+        dispatch(startRequest());
+
+        return addDocument(indexName, _id, docType, payload)
+            .then(body => dispatch(requestOk(body)),
+                error => dispatch(requestKo(error)));
+    }
+);
+
+const SearchDocument = (index, docType, payload) => (
+    (dispatch) => {
+        dispatch(startRequest());
+        return search(index, docType, payload)
+            .then(body => dispatch(requestOk(body)),
+                error => dispatch(requestKo(error)));
+    }
+);
+
+const DeleteDocument = (index, _id, docType) => (
+    (dispatch) => {
+        dispatch(startRequest());
+        return deleteDocument(index, _id, docType)
+            .then(body => dispatch(requestOk(body)),
+                error => dispatch(requestKo(error)));
+    }
+);
+
+const DeleteEverything = () => (
+    (dispatch) => {
+        dispatch(startRequest());
+        deleteAll()
+            .then(body => dispatch(requestOk(body)),
+                error => dispatch(requestKo(error)));
+    }
+);
+
+export {
+    Ping,
+    CreateIndex,
+    CreateDocument,
+    SearchDocument,
+    DeleteDocument,
+    DeleteEverything,
+};
