@@ -38,21 +38,13 @@ const initIndexMapping = (indexName, docType, payload) => {
   });
 };
 
-const addDocument = (indexName, _id, docType, payload) => {
-  esClient.index({
+const addDocument = (indexName, _id, docType, payload) => esClient.index({
     index: indexName,
     type: docType,
     id: _id,
     body: payload,
-  }, (error, response) => {
-    if (error) {
-      console.error(`ERROR - addDocument - ${indexName} , ${error}`);
-      return error;
-    }
-    console.log(`addDocument : ${indexName}`);
-    return response;
   });
-};
+
 
 const updateDocument = (indexName, _id, docType, payload) => {
   esClient.update({
@@ -70,20 +62,12 @@ const updateDocument = (indexName, _id, docType, payload) => {
   });
 };
 
-const search = (indexName, docType, payload) => {
-  esClient.search({
+const search = (indexName, docType, payload) => esClient.search({
     index: indexName,
     type: docType,
-    body: payload,
-  }, (error, response) => {
-    if (error) {
-      console.error(`ERROR - search - ${indexName} , ${error}`);
-      return error;
-    }
-    console.log(`search : ${indexName}`);
-    return response;
+    q: payload,
   });
-};
+
 
 const deleteDocument = (indexName, _id, docType) => {
   esClient.delete({

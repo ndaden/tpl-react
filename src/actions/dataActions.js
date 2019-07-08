@@ -44,8 +44,7 @@ const CreateIndex = indexName => (
 const CreateDocument = (indexName, _id, docType, payload) => (
     (dispatch) => {
         dispatch(startRequest());
-
-        return addDocument(indexName, _id, docType, payload)
+        addDocument(indexName, _id, docType, payload)
             .then(body => dispatch(requestOk(body)),
                 error => dispatch(requestKo(error)));
     }
@@ -54,7 +53,7 @@ const CreateDocument = (indexName, _id, docType, payload) => (
 const SearchDocument = (index, docType, payload) => (
     (dispatch) => {
         dispatch(startRequest());
-        return search(index, docType, payload)
+        search(index, docType, payload)
             .then(body => dispatch(requestOk(body)),
                 error => dispatch(requestKo(error)));
     }
