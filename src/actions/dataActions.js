@@ -4,6 +4,7 @@ import {
     search,
     addDocument,
     createIndex,
+    indexList,
     deleteAll,
     deleteDocument,
 } from '../elasticsearch/init';
@@ -19,8 +20,24 @@ const requestOk = result => ({
     result,
 });
 
+
 const requestKo = error => ({
     type: Constants.REQUEST_KO,
+    error,
+});
+
+// Indexes actions
+const startGetIndexes = () => ({
+    type: Constants.START_GET_INDEXES,
+});
+
+const getIndexesOk = result => ({
+    type: Constants.GET_INDEXES_OK,
+    result,
+});
+
+const getIndexesKo = error => ({
+    type: Constants.GET_INDEXES_KO,
     error,
 });
 
@@ -38,6 +55,15 @@ const CreateIndex = indexName => (
         createIndex(indexName)
             .then(body => dispatch(requestOk(body)),
                 error => dispatch(requestKo(error)));
+    }
+);
+
+const IndexList = () => (
+    (dispatch) => {
+        dispatch(startGetIndexes());
+        indexList()
+            .then(body => dispatch(getIndexesOk(body)),
+                error => dispatch(getIndexesKo(error)));
     }
 );
 
@@ -80,6 +106,7 @@ const DeleteEverything = () => (
 export {
     Ping,
     CreateIndex,
+    IndexList,
     CreateDocument,
     SearchDocument,
     DeleteDocument,

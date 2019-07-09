@@ -1,23 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
     Ping,
     DeleteEverything,
     CreateIndex,
+    IndexList,
     CreateDocument,
     SearchDocument,
 } from '../actions/dataActions';
 
 const Page1 = (props) => {
     const [indexName, setindexName] = useState('');
+    const [selectedindexName, setselectedindexName] = useState('');
     const [documentName, setdocumentName] = useState('');
     const [searchQuery, setsearchQuery] = useState('');
     const {
         dispatch,
         isSearching,
         result,
+        indexes,
         error,
     } = props;
+
+    useEffect(() => {
+        dispatch(IndexList());
+    }, [result]);
 
     const pingElasticsearch = () => {
         dispatch(Ping());
@@ -66,9 +73,11 @@ const Page1 = (props) => {
                         <div className="level-item">
                             <div className="control">
                                 <div className="select">
-                                    <select>
+                                    <select name="selectedindexName" onChange={e => setselectedindexName(e.target.value)}>
                                         <option>-- Choisir un index --</option>
-                                        <option>index 1</option>
+                                        {indexes && Object.keys(indexes).map(
+                                            index => (<option value={index}>{index}</option>),
+                                            )}
                                     </select>
                                 </div>
                             </div>
@@ -79,7 +88,7 @@ const Page1 = (props) => {
                                     <input type="text" className="input" name="documentName" onChange={e => setdocumentName(e.target.value)} placeholder="Document name" />
                                 </div>
                                 <div className="control">
-                                    <button className="button is-primary" onClick={() => createElasticSearchDocument(indexName, documentName)}>New Document</button>
+                                    <button className="button is-primary" onClick={() => createElasticSearchDocument(selectedindexName, documentName)}>New Document</button>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +98,7 @@ const Page1 = (props) => {
                                     <input type="text" className="input" name="searchQuery" onChange={e => setsearchQuery(e.target.value)} placeholder="Query" />
                                 </div>
                                 <div className="control">
-                                    <button className="button is-primary" onClick={() => searchElasticSearch(indexName, searchQuery)}>Search</button>
+                                    <button className="button is-primary" onClick={() => searchElasticSearch(selectedindexName, searchQuery)}>Search</button>
                                 </div>
                             </div>
                         </div>
@@ -119,6 +128,7 @@ const Page1 = (props) => {
 const mapStateToProps = state => ({
     isSearching: state.data.isSearching,
     result: state.data.result,
+    indexes: state.indexes.indexes,
     error: state.data.error,
 });
 export default connect(mapStateToProps)(Page1);

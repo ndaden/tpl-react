@@ -2,18 +2,18 @@ import * as Constants from '../actions/constants';
 
 export default (state = {}, action) => {
     switch (action.type) {
-        case Constants.START_REQUEST:
+        case Constants.START_GET_INDEXES:
             return {
                 ...state,
                 isSearching: true,
             };
-        case Constants.REQUEST_OK:
+        case Constants.GET_INDEXES_OK:
             return {
                 ...state,
                 isSearching: false,
-                result: action.result,
+                indexes: action.result,
             };
-        case Constants.REQUEST_KO:
+        case Constants.GET_INDEXES_KO:
             return {
                 ...state,
                 isSearching: false,

@@ -12,16 +12,9 @@ const ping = () => esClient.ping({
 
 const createIndex = indexName => esClient.indices.create({ index: indexName });
 
-const indexExists = (indexName) => {
-  esClient.indices.exists({ index: indexName }, (error, response) => {
-    if (error) {
-      console.error(`ERROR - indexExists - ${indexName} , ${error}`);
-      return error;
-    }
-    console.log(`indexExists : ${indexName}`);
-    return response;
-  });
-};
+const indexExists = indexName => esClient.indices.exists({ index: indexName });
+
+const indexList = () => esClient.indices.get({ index: '_all' });
 
 const initIndexMapping = (indexName, docType, payload) => {
   esClient.indices.putMapping({
@@ -92,6 +85,7 @@ export {
   ping,
   createIndex,
   indexExists,
+  indexList,
   initIndexMapping,
   addDocument,
   updateDocument,
