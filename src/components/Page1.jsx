@@ -61,6 +61,18 @@ const Page1 = (props) => {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div className="level">
+                        <div className="level-item">
+                            <div className="control">
+                                <div className="select">
+                                    <select>
+                                        <option>-- Choisir un index --</option>
+                                        <option>index 1</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <div className="level-item">
                             <div className="field has-addons">
                                 <div className="control">
@@ -82,16 +94,7 @@ const Page1 = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className="level">
-                        <div className="level-item">
-                            {isSearching && <progress className="progress is-small is-dark" max="100">10%</progress>}
-                        </div>
-                    </div>
                     <div className="columns">
-                        <div className="column">
-                            <input type="text" name="indexName" onChange={e => setindexName(e.target.value)} />
-                            <button className="button is-primary" onClick={() => createElasticSearchIndex(indexName)}>Create Index</button>
-                        </div>
                         <div className="column">
                             <div className="notification is-primary">
                                 <button className="delete"> </button>
@@ -101,8 +104,11 @@ const Page1 = (props) => {
                                 </p>
                             </div>
                         </div>
-                        <div className="column">3</div>
-                        <div className="column">4</div>
+                    </div>
+                    <div className="level">
+                        <div className="level-item">
+                            {isSearching && <progress className="progress is-small is-dark" max="100">10%</progress>}
+                        </div>
                     </div>
                 </div>
             </section>

@@ -10,11 +10,11 @@ const NavBar = () => {
             <Link className="navbar-item" to="/">
                 ReactJS Template
             </Link>
-        <Link role="button" className={`navbar-burger burger ${active ? 'is-active' : ''}`} aria-label="menu" aria-expanded="true" data-target="nvmenu" onClick={toggleBurger} to="">
+        <a role="button" className={`navbar-burger burger ${active ? 'is-active' : ''}`} aria-label="menu" aria-expanded="true" data-target="nvmenu" onClick={toggleBurger} href>
             <span aria-hidden="true" />
             <span aria-hidden="true" />
             <span aria-hidden="true" />
-        </Link>
+        </a>
         </div>
 
         <div className={`navbar-menu ${active ? 'is-active' : ''}`} id="nvmenu">
@@ -30,7 +30,7 @@ const NavBar = () => {
                 </Link>
 
                 <div className="navbar-item has-dropdown is-hoverable">
-                    <Link className="navbar-link" to="">Autres</Link>
+                    <a className="navbar-link" href>Autres</a>
                     <div className="navbar-dropdown">
                         <Link className="navbar-item" to="">Truc</Link>
                         <Link className="navbar-item" to="">Autre Truc</Link>

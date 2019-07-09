@@ -1,7 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Page1 from './components/Page1';
-import NavBar from './components/NavBar';
+import {
+    Page1,
+    NavBar,
+    SignIn,
+    SignUp,
+} from './components';
 
 const Index = () => (
     <div>
@@ -21,6 +25,8 @@ const App = () => (
     <Router>
         <NavBar />
         <Route path="/" exact component={Index} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/signup" component={SignUp} />
         <Route path="/page1" component={Page1} />
         <Route path="/toto" exact component={Toto} />
         <Route path="/toto/:id/:name" component={Toto} />
