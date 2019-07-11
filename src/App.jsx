@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import {
-    Page1,
+    ElasticTool,
     NavBar,
     SignIn,
     SignUp,
+    Footer,
 } from './components';
 
 const Index = () => (
@@ -27,9 +28,10 @@ const App = () => (
         <Route path="/" exact component={Index} />
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
-        <Route path="/page1" component={Page1} />
+        <Route path="/elastictool" component={ElasticTool} />
         <Route path="/toto" exact component={Toto} />
         <Route path="/toto/:id/:name" component={Toto} />
+        <Footer />
     </Router>
 );
 

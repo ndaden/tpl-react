@@ -10,7 +10,7 @@ const NavBar = () => {
             <Link className="navbar-item" to="/">
                 ReactJS Template
             </Link>
-        <a role="button" className={`navbar-burger burger ${active ? 'is-active' : ''}`} aria-label="menu" aria-expanded="true" data-target="nvmenu" onClick={toggleBurger} >
+        <a role="button" className={`navbar-burger burger ${active ? 'is-active' : ''}`} aria-label="menu" aria-expanded="true" data-target="nvmenu" onClick={toggleBurger}>
             <span aria-hidden="true" />
             <span aria-hidden="true" />
             <span aria-hidden="true" />
@@ -21,9 +21,6 @@ const NavBar = () => {
             <div className="navbar-start">
                 <Link className="navbar-item" to="/">
                     Home
-                </Link>
-                <Link className="navbar-item" to="/page1">
-                    Page 1
                 </Link>
                 <Link className="navbar-item" to="/toto">
                     Toto
@@ -39,6 +36,9 @@ const NavBar = () => {
             </div>
 
             <div className="navbar-end">
+                <Link className="navbar-item" to="/elastictool">
+                    ElasticSearch Admin
+                </Link>
                 <div className="navbar-item">
                     <div className="buttons">
                         <Link className="button is-primary" to="/signup">Créer un compte</Link>

@@ -1,11 +1,13 @@
 import NavBar from './NavBar';
-import Page1 from './Page1';
+import ElasticTool from './ElasticTool';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import Footer from './Footer';
 
 export {
     NavBar,
-    Page1,
+    ElasticTool,
     SignIn,
     SignUp,
+    Footer,
 };
