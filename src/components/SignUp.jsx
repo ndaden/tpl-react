@@ -1,4 +1,5 @@
 import React from 'react';
+import Basic from './Forms/Basic';
 
 const SignIn = () => {
     console.log('begin');
@@ -30,7 +31,7 @@ const SignIn = () => {
                         </div>
                     </div>
                     <div className="column">
-                        <h2>TOTO</h2>
+                        <Basic />
                     </div>
                 </div>
 
