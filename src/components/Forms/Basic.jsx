@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {
     Formik,
     Form,
@@ -10,31 +11,28 @@ import SignUpSchema from './ValidationSchemas/SignUpSchema';
 const Basic = () => (
     <div>
         <Formik
-          initialValues={{ firstname: '', lastname: '', email: '', phonenumber: '06 ' }}
+          initialValues={{ username: '', email: '', password: '' }}
           validationSchema={SignUpSchema}
           onSubmit={
                 (values, { setSubmitting }) => {
-                    setTimeout(() => {
-                        console.log(JSON.stringify(values));
+                    axios.post('http://localhost:3000/api/v1/users', values)
+                    .then((response) => {
                         setSubmitting(false);
-                    }, 400);
+                        console.log(response);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
             }
        }>
        {({ isSubmitting, errors, touched }) => (
         <Form>
             <div className="field">
-            <label className="label">Prénom <span> *</span></label>
+            <label className="label">Nom d&apos;utilisateur<span> *</span></label>
             <div className="control">
-            <Field type="text" className={`input ${errors.firstname && touched.firstname ? 'is-danger' : ''}`} name="firstname" />
+            <Field type="text" className={`input ${errors.username && touched.username ? 'is-danger' : ''}`} name="username" />
             </div>
-            <ErrorMessage name="firstname" className="help is-danger" component="p" />
-            </div>
-            <div className="field">
-            <label className="label">Nom</label>
-            <div className="control">
-            <Field type="text" className={`input ${errors.lastname && touched.lastname ? 'is-danger' : ''}`} name="lastname" />
-            </div>
-            <ErrorMessage name="lastname" className="help is-danger" component="p" />
+            <ErrorMessage name="username" className="help is-danger" component="p" />
             </div>
 
             <div className="field">
@@ -46,11 +44,11 @@ const Basic = () => (
             </div>
 
             <div className="field">
-            <label className="label">Téléphone</label>
+            <label className="label">Mot de passe</label>
             <div className="control">
-            <Field type="text" className={`input ${errors.phonenumber && touched.phonenumber ? 'is-danger' : ''}`} name="phonenumber" />
+            <Field type="password" className={`input ${errors.password && touched.password ? 'is-danger' : ''}`} name="password" />
             </div>
-            <ErrorMessage name="phonenumber" className="help is-danger" component="p" />
+            <ErrorMessage name="password" className="help is-danger" component="p" />
             </div>
 
             <button type="submit" className="button is-success" disabled={isSubmitting}>

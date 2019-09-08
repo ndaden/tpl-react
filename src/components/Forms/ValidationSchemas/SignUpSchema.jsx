@@ -1,11 +1,9 @@
 import * as Yup from 'yup';
 
 const SignUpSchema = Yup.object().shape({
-    firstname: Yup.string()
+    username: Yup.string()
                     .required('ce champ est obligatoire'),
-    lastname: Yup.string()
-                    .required('ce champ est obligatoire'),
-    phonenumber: Yup.string()
+    password: Yup.string()
                     .required('ce champ est obligatoire'),
     email: Yup.string()
                     .required('ce champ est obligatoire'),
