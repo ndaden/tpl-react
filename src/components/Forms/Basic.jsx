@@ -16,7 +16,7 @@ const Basic = () => (
           validationSchema={SignUpSchema}
           onSubmit={
                 (values, { setSubmitting }) => {
-                    axios.post(`${config.API_URI}${config.API_USERS}`, values)
+                    axios.post(`${process.env.API_URI}${process.env.API_USERS}`, values)
                     .then((response) => {
                         setSubmitting(false);
                         console.log(response);
