@@ -7,9 +7,7 @@ import {
     ErrorMessage,
     } from 'formik';
 import SignUpSchema from './ValidationSchemas/SignUpSchema';
-
-const apiUri = process.env.API_URI;
-const apiUsers = process.env.API_USERS;
+import * as config from '../../config';
 
 const Basic = () => (
     <div>
@@ -18,7 +16,7 @@ const Basic = () => (
           validationSchema={SignUpSchema}
           onSubmit={
                 (values, { setSubmitting }) => {
-                    axios.post(`${apiUri}${apiUsers}`, values)
+                    axios.post(`${config.API_URI}${config.API_USERS}`, values)
                     .then((response) => {
                         setSubmitting(false);
                         console.log(response);
