@@ -7,7 +7,6 @@ import {
     ErrorMessage,
     } from 'formik';
 import SignUpSchema from './ValidationSchemas/SignUpSchema';
-import * as config from '../../config';
 
 const Basic = () => (
     <div>
