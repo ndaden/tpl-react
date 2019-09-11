@@ -25,6 +25,7 @@
         "react/jsx-indent": [0],
         "react/button-has-type": [0],
         "react/jsx-filename-extension": [0],
+        "react/jsx-closing-bracket-location": [0],
         "import/prefer-default-export": [0],
         "linebreak-style": [0],
         "jsx-a11y/anchor-is-valid": [0],
