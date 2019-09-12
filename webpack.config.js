@@ -2,7 +2,11 @@
 const path = require("path");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const envKeys = Object.keys(process.env).reduce((prev, next) => {
+    prev[`process.env.${next}`] = JSON.stringify(env[next]);
+    return prev;
+  }, {});
+  
 let config = {
 	entry: "./src/index.js",
 	output: {
@@ -48,6 +52,7 @@ let config = {
 		new MiniCssExtractPlugin({
 			filename: 'css/style.css'
 		}),
+		new webpack.DefinePlugin(envKeys),
 	],
 	devServer: {
 		contentBase: path.resolve(__dirname, "./public"),
