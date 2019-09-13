@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const NavBar = () => {
+const NavBar = ({ user }) => {
     const [active, setActive] = useState(false);
     const toggleBurger = () => setActive(!active);
+    console.log(user);
     return (
     <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">

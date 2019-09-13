@@ -12,6 +12,7 @@ import NotificationCard from './NotificationCard';
 
 const SignupForm = () => {
     const [result, setresult] = useState(undefined);
+
     return (
     <section className="section">
         <div className="container">
