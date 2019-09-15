@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuthentication } from '../auth.utils';
 
-const NavBar = ({ user }) => {
+const NavBar = () => {
     const [active, setActive] = useState(false);
     const toggleBurger = () => setActive(!active);
-    console.log(user);
+    const user = useAuthentication();
+
     return (
     <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
@@ -35,16 +37,35 @@ const NavBar = ({ user }) => {
                     </div>
                 </div>
             </div>
+            <div className="navbar-item is-centered is-bold has-text-white has-text-weight-bold">Bonjour {user && user.username}</div>
 
             <div className="navbar-end">
+            {
+                user !== 'Unauthorized'
+                && (
                 <Link className="navbar-item" to="/elastictool">
                     ElasticSearch Admin
                 </Link>
+                )
+            }
                 <div className="navbar-item">
-                    <div className="buttons">
+                    {
+                        user === 'Unauthorized'
+                        && (
+                        <div className="buttons">
                         <Link className="button is-primary" to="/signup">Créer un compte</Link>
                         <Link className="button is-light" to="/signin">Se connecter</Link>
-                    </div>
+                        </div>
+                        )
+                    }
+                    {
+                        (user !== 'Unauthorized')
+                        && (
+                        <div className="buttons">
+                        <Link className="button is-primary is-inverted is-outlined" to="/logout">Se Déconnecter</Link>
+                        </div>
+                        )
+                    }
                 </div>
                 <div className="navbar-item">
                     <div className="tags has-addons are-normal">

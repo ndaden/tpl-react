@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as config from './config';
 
@@ -16,11 +17,22 @@ export const isAuthenticated = () => {
             url: `${config.API_URI}${config.API_AUTH}`,
         };
     }
+    const res = axios(options).then((data) => {
+        return data.data;
+    });
+    return res;
+};
 
-    return axios(options)
-        .then(response => ({ success: true, data: response.data }))
-        .catch((error) => {
-            localStorage.removeItem('token');
-            return { success: false, data: error.response.data };
-        });
+export const useAuthentication = () => {
+    const [user, setuser] = useState({});
+
+    useEffect(() => {
+        async function getSession() {
+            const result = await isAuthenticated();
+            setuser(result.data);
+        }
+        getSession();
+    }, []);
+
+    return user;
 };

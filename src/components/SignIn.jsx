@@ -1,10 +1,14 @@
 import React from 'react';
 import SigninForm from './Forms/SigninForm';
+import { useAuthentication } from '../auth.utils';
 
 const SignIn = () => {
-    console.log('begin');
+    const user = useAuthentication();
+    if (user === 'Unauthorized') {
+        return <SigninForm />;
+    }
     return (
-        <SigninForm />
+       <p>{`Bonjour ${user.username} - ${user.email}`}</p>
     );
 };
 

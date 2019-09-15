@@ -1,20 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import {
     ElasticTool,
     NavBar,
     SignIn,
     SignUp,
+    SignOut,
     Footer,
+    ProtectedRoute,
 } from './components';
-import { isAuthenticated } from './auth.utils.js';
+import { useAuthentication } from './auth.utils';
 
-const Index = ({ authenticatedUser }) => (
-    <div>
-        {authenticatedUser.username ? `Bonjour ${authenticatedUser.username}, votre email est : ${authenticatedUser.email}` : 'Connectez vous !' }
-            <nav><Link to="/page1">Go to Page 1</Link></nav>
-    </div>
-);
+const Index = () => {
+    const user = useAuthentication();
+    return (
+        <div>
+        <p>{user === 'Unauthorized' ? 'Bonjour invité,' : `Bonjour ${user.username} - ${user.email}`}</p>
+        <nav><Link to="/page1">Go to Page 1</Link></nav>
+        </div>
+    );
+};
 
 const Toto = ({ match = {} }) => (
     <div>
@@ -24,24 +29,16 @@ const Toto = ({ match = {} }) => (
 );
 
 const App = () => {
-    let user = {};
-
-    useEffect(() => {
-        function toto() {
-            isAuthenticated().then((res) => { user = res.data; });
-        }
-        toto();
-    });
-
     return (
         <Router>
-        <NavBar authenticatedUser={user} />
-        <Route path="/" exact component={() => <Index authenticatedUser={user} />} />
-        <Route path="/signin" component={SignIn} authenticatedUser={user} />
-        <Route path="/signup" component={SignUp} authenticatedUser={user} />
-        <Route path="/elastictool" component={ElasticTool} authenticatedUser={user} />
-        <Route path="/toto" exact component={Toto} authenticatedUser={user} />
-        <Route path="/toto/:id/:name" component={Toto} authenticatedUser={user} />
+        <NavBar />
+        <Route path="/" exact component={Index} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/logout" component={SignOut} />
+        <ProtectedRoute path="/elastictool" component={ElasticTool} />
+        <Route path="/toto" exact component={Toto} />
+        <Route path="/toto/:id/:name" component={Toto} />
         <Footer />
         </Router>
     );

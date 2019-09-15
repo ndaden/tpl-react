@@ -1,7 +1,6 @@
 import React from 'react';
 
 const NotificationCard = ({ type, title, body, className }) => {
-    console.log('notif');
     return (
         <article className={`message ${type === 'success' ? 'is-success' : 'is-danger'} ${className}`}>
             <div className="message-header">

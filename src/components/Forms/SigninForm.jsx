@@ -10,8 +10,9 @@ import * as config from '../../config';
 import SignInSchema from './ValidationSchemas/SignInSchema';
 import NotificationCard from './NotificationCard';
 
-const SignupForm = () => {
+const SignupForm = (props) => {
     const [result, setresult] = useState(undefined);
+    console.log(props);
 
     return (
     <section className="section">
@@ -28,6 +29,7 @@ const SignupForm = () => {
                                     setSubmitting(false);
                                     localStorage.setItem('token', response.data.token);
                                     setresult(response.data);
+                                    setTimeout(() => { window.location = '/'; }, 2000);
                                 })
                                 .catch((error) => {
                                     setSubmitting(false);

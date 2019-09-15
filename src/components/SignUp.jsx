@@ -1,8 +1,9 @@
 import React from 'react';
 import SignupForm from './Forms/SignupForm';
+import { useAuthentication } from '../auth.utils';
 
 const SignIn = () => {
-    console.log('begin');
+    useAuthentication();
     return (
         <SignupForm />
     );

@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Footer = () => {
-    console.log('begin');
     return (
         <footer className="footer">
             <div className="content has-text-centered">

@@ -1,4 +1,5 @@
 /* eslint-disable */
+require("@babel/polyfill");
 const path = require("path");
 const webpack = require("webpack");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
@@ -9,7 +10,7 @@ const envKeys = Object.keys(process.env).reduce((prev, next) => {
   }, {});
 
 let config = {
-	entry: "./src/index.js",
+	entry: ["@babel/polyfill","./src/index.js"],
 	output: {
 		path: path.resolve(__dirname, "./public"),
 		filename: "./bundle.js"
