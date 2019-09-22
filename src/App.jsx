@@ -10,6 +10,7 @@ import {
     ProtectedRoute,
 } from './components';
 import { useAuthentication } from './auth.utils';
+import AdminComparateur from './components/Admin/AdminComparateurOffres';
 
 const Index = () => {
     const user = useAuthentication();
@@ -39,6 +40,7 @@ const App = () => {
         <ProtectedRoute path="/elastictool" component={ElasticTool} />
         <Route path="/toto" exact component={Toto} />
         <Route path="/toto/:id/:name" component={Toto} />
+        <Route path="/admin" component={AdminComparateur} />
         <Footer />
         </Router>
     );
