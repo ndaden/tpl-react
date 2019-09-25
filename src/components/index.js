@@ -5,6 +5,7 @@ import SignUp from './SignUp';
 import SignOut from './SignOut';
 import Footer from './Footer';
 import ProtectedRoute from './ProtectedRoute';
+import Error from './Error';
 
 export {
     NavBar,
@@ -14,4 +15,5 @@ export {
     SignOut,
     Footer,
     ProtectedRoute,
+    Error,
 };

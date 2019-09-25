@@ -6,6 +6,7 @@ import configureStore from './store';
 import App from './App';
 import './style.scss';
 
+
 const render = (Component) => {
     ReactDOM.render(
         <Provider store={configureStore()}>

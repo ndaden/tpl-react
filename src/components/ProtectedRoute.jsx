@@ -1,13 +1,14 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { useAuthentication } from '../auth.utils';
+import SignIn from './SignIn';
 
 const ProtectedRoute = (props) => {
     const user = useAuthentication();
-    if (user && user !== 'Unauthorized') {
+    if (user.isAuthenticated) {
         return <Route {...props} />;
     }
-    return <Redirect to="/signin" />;
+    return <Route {...props} component={SignIn} />;
 };
 
 export default ProtectedRoute;

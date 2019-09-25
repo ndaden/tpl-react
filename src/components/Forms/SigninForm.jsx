@@ -10,9 +10,8 @@ import * as config from '../../config';
 import SignInSchema from './ValidationSchemas/SignInSchema';
 import NotificationCard from './NotificationCard';
 
-const SignupForm = (props) => {
+const SignupForm = () => {
     const [result, setresult] = useState(undefined);
-    console.log(props);
 
     return (
     <section className="section">

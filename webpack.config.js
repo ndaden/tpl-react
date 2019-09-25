@@ -4,6 +4,7 @@ const path = require("path");
 const webpack = require("webpack");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const envKeys = Object.keys(process.env).reduce((prev, next) => {
     prev[`process.env.${next}`] = JSON.stringify(process.env[next]);
     return prev;
@@ -34,7 +35,24 @@ let config = {
 				resolve: { extensions: [".js", ".jsx"] }
 			},
 			{
-				test: /\.scss$/,
+				test: /\.(ttf|woff|woff2|eot|svg)$/,
+				loader: "file-loader",
+				options: {
+					name: '[name].[ext]',
+					outputPath: "/assets/fonts"
+				}
+			},
+			{
+				test: /\.(png|jpg|jpeg|gif)$/,
+				loader: "file-loader",
+				options: {
+					name: '[name].[ext]',
+					outputPath: "/assets/images"
+				}
+			},
+			{
+				// Apply rule for .sass, .scss or .css files
+				test: /\.(sa|sc|c)ss$/,
 				use: [
 					MiniCssExtractPlugin.loader,
 					{
@@ -52,7 +70,7 @@ let config = {
 	},
 	plugins: [
 		new MiniCssExtractPlugin({
-			filename: 'css/style.css'
+			filename: '/assets/css/style.css',
 		}),
 		new webpack.DefinePlugin(envKeys),
 	],

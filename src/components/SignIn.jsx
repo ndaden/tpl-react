@@ -4,7 +4,7 @@ import { useAuthentication } from '../auth.utils';
 
 const SignIn = () => {
     const user = useAuthentication();
-    if (user === 'Unauthorized') {
+    if (!user.isAuthenticated) {
         return <SigninForm />;
     }
     return (

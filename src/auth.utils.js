@@ -19,7 +19,11 @@ export const isAuthenticated = () => {
     }
     const res = axios(options).then((data) => {
         return data.data;
+    })
+    .catch(() => {
+        return { isAuthenticated: false };
     });
+
     return res;
 };
 
@@ -34,5 +38,8 @@ export const useAuthentication = () => {
         getSession();
     }, []);
 
+    if (user === undefined) {
+        return { isAuthenticated: false };
+    }
     return user;
 };

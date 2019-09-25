@@ -41,7 +41,7 @@ const NavBar = () => {
 
             <div className="navbar-end">
             {
-                user !== 'Unauthorized'
+                (user.isAuthenticated)
                 && (
                 <Link className="navbar-item" to="/elastictool">
                     ElasticSearch Admin
@@ -50,7 +50,7 @@ const NavBar = () => {
             }
                 <div className="navbar-item">
                     {
-                        user === 'Unauthorized'
+                        (!user.isAuthenticated)
                         && (
                         <div className="buttons">
                         <Link className="button is-primary" to="/signup">Créer un compte</Link>
@@ -59,7 +59,7 @@ const NavBar = () => {
                         )
                     }
                     {
-                        (user !== 'Unauthorized')
+                        (user.isAuthenticated)
                         && (
                         <div className="buttons">
                         <Link className="button is-primary is-inverted is-outlined" to="/logout">Se Déconnecter</Link>
