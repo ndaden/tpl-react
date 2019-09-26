@@ -18,7 +18,7 @@ export const isAuthenticated = () => {
         };
     }
     const res = axios(options).then((data) => {
-        return data.data;
+        return { ...data };
     })
     .catch(() => {
         return { isAuthenticated: false };

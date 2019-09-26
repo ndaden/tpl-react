@@ -39,7 +39,8 @@ let config = {
 				loader: "file-loader",
 				options: {
 					name: '[name].[ext]',
-					outputPath: "/assets/fonts"
+					outputPath: "/assets/fonts",
+					publicPath: "/assets/fonts"
 				}
 			},
 			{
@@ -47,7 +48,8 @@ let config = {
 				loader: "file-loader",
 				options: {
 					name: '[name].[ext]',
-					outputPath: "/assets/images"
+					outputPath: "/assets/images",
+					publicPath: "/assets/images"
 				}
 			},
 			{

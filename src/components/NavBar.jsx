@@ -37,7 +37,7 @@ const NavBar = () => {
                     </div>
                 </div>
             </div>
-            <div className="navbar-item is-centered is-bold has-text-white has-text-weight-bold">Bonjour {user && user.username}</div>
+            <div className="navbar-item is-centered is-bold has-text-white has-text-weight-bold">Bonjour {user.isAuthenticated ? user.data.username : ''}</div>
 
             <div className="navbar-end">
             {

@@ -16,7 +16,7 @@ const Index = () => {
     const user = useAuthentication();
     return (
         <div>
-        <p>{user.isAuthenticated ? `Bonjour ${user.username} - ${user.email}` : 'Bonjour invité,'}</p>
+        <p>{user.isAuthenticated ? `Bonjour ${user.data.username} - ${user.data.email}` : 'Bonjour invité,'}</p>
         <nav><Link to="/page1">Go to Page 1</Link></nav>
         </div>
     );
