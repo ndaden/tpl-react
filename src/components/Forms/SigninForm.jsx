@@ -1,42 +1,41 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { connect } from 'react-redux';
 import {
     Formik,
     Form,
     Field,
     ErrorMessage,
 } from 'formik';
-import * as config from '../../config';
+
+import {
+    login,
+} from '../../actions/authActions';
+
 import SignInSchema from './ValidationSchemas/SignInSchema';
 import NotificationCard from './NotificationCard';
 
-const SignupForm = () => {
-    const [result, setresult] = useState(undefined);
+const SignupForm = (props) => {
+    const {
+        dispatch,
+        isLogingIn,
+        toto,
+        auth: { data: { message, success, token } = {} } = {},
+     } = props;
+    const submitSignInForm = (values) => {
+        dispatch(login(values));
+    };
 
     return (
     <section className="section">
+        {success && localStorage.setItem('token', token)}
         <div className="container">
             <div className="columns">
             <div className="column">
                 <Formik
                   initialValues={{ username: '', password: '' }}
                   validationSchema={SignInSchema}
-                  onSubmit={
-                        (values, { setSubmitting }) => {
-                            axios.post(`${config.API_URI}${config.API_AUTH}`, values)
-                                .then((response) => {
-                                    setSubmitting(false);
-                                    localStorage.setItem('token', response.data.token);
-                                    setresult(response.data);
-                                    setTimeout(() => { window.location = '/'; }, 2000);
-                                })
-                                .catch((error) => {
-                                    setSubmitting(false);
-                                    setresult(error.response.data);
-                                });
-                        }
-                    }>
-                    {({ isSubmitting, errors, touched }) => (
+                  onSubmit={submitSignInForm}>
+                    {({ errors, touched }) => (
                         <Form autoComplete="off">
                             <div className="field">
                                 <label className="label">Nom d&apos;utilisateur<span> *</span></label>
@@ -54,7 +53,7 @@ const SignupForm = () => {
                                 <ErrorMessage name="password" className="help is-danger" component="p" />
                             </div>
 
-                            <button type="submit" className="button is-success" disabled={isSubmitting}>
+                            <button type="submit" className="button is-success" disabled={isLogingIn}>
                                 Se connecter
                             </button>
                         </Form>
@@ -62,15 +61,22 @@ const SignupForm = () => {
                 </Formik>
             </div>
             <div className="column">
-            {result
+            {message !== undefined
             && (
-                <NotificationCard type={`${result.success ? 'success' : 'error'}`} title={`${result.success ? 'Felicitations' : 'Attention'}`} body={result.message} />
+                <NotificationCard type={`${success ? 'success' : 'error'}`} title={`${success ? 'Felicitations' : 'Attention'}`} body={message} />
                 )}
             </div>
             </div>
         </div>
+        {console.log(toto)}
     </section>
     );
 };
 
-export default SignupForm;
+const mapStateToProps = state => ({
+    isLogingIn: state.auth.isLogingIn,
+    auth: state.auth.result,
+    toto: state.auth.result,
+});
+
+export default connect(mapStateToProps)(SignupForm);
