@@ -1,14 +1,21 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import SigninForm from './Forms/SigninForm';
-import { useAuthentication } from '../auth.utils';
 
-const SignIn = () => {
-    const user = useAuthentication();
-    if (!user.isAuthenticated) {
-        return <SigninForm />;
+const SignIn = ({ loginData,
+                  checkAuth,
+                  handleLogin,
+                  result: {
+                      data: { isAuthenticated } = { isAuthenticated: false } } = {} } = {}) => {
+    if (isAuthenticated) {
+        return <Redirect to="/" />;
     }
     return (
-       <p>{`Bonjour ${user.username} - ${user.email}`}</p>
+        <SigninForm
+          handleLogin={handleLogin}
+          checkAuth={checkAuth}
+          loginData={loginData}
+          isAuthenticated={isAuthenticated} />
     );
 };
 

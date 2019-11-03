@@ -3,6 +3,7 @@ import axios from 'axios';
 import * as config from './config';
 
 export const isAuthenticated = () => {
+    console.log('calling isAuthenticated');
     const jwt = localStorage.getItem('token');
     let options = {};
     if (jwt) {
@@ -17,14 +18,7 @@ export const isAuthenticated = () => {
             url: `${config.API_URI}${config.API_AUTH}`,
         };
     }
-    const res = axios(options).then((data) => {
-        return { ...data };
-    })
-    .catch(() => {
-        return { isAuthenticated: false };
-    });
-
-    return res;
+    return axios(options);
 };
 
 export const useAuthentication = () => {
@@ -43,3 +37,5 @@ export const useAuthentication = () => {
     }
     return user;
 };
+
+export const handleLogin = values => axios.post(`${config.API_URI}${config.API_AUTH}`, values);

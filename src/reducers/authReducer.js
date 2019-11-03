@@ -11,13 +11,19 @@ export default (state = {}, action) => {
             return {
                 ...state,
                 isLogingIn: false,
-                result: action.result,
+                loginData: action.result,
             };
         case Constants.LOGIN_KO:
             return {
                 ...state,
                 isLogingIn: false,
                 error: action.error,
+            };
+        case Constants.IS_AUTHENTICATED:
+            return {
+                ...state,
+                isLogingIn: false,
+                result: action.result,
             };
         default:
             return state;

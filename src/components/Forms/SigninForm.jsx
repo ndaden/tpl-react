@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import {
     Formik,
     Form,
@@ -7,27 +6,25 @@ import {
     ErrorMessage,
 } from 'formik';
 
-import {
-    login,
-} from '../../actions/authActions';
-
 import SignInSchema from './ValidationSchemas/SignInSchema';
 import NotificationCard from './NotificationCard';
 
 const SignupForm = (props) => {
     const {
-        dispatch,
         isLogingIn,
-        toto,
-        auth: { data: { message, success, token } = {} } = {},
+        handleLogin,
+        loginData,
+        checkAuth,
      } = props;
+
     const submitSignInForm = (values) => {
-        dispatch(login(values));
+        handleLogin(values);
     };
 
+    checkAuth(loginData);
     return (
     <section className="section">
-        {success && localStorage.setItem('token', token)}
+    {console.log(loginData)}
         <div className="container">
             <div className="columns">
             <div className="column">
@@ -61,22 +58,15 @@ const SignupForm = (props) => {
                 </Formik>
             </div>
             <div className="column">
-            {message !== undefined
+            {loginData && loginData.data.message !== undefined
             && (
-                <NotificationCard type={`${success ? 'success' : 'error'}`} title={`${success ? 'Felicitations' : 'Attention'}`} body={message} />
+                <NotificationCard type={`${loginData.data.success ? 'success' : 'error'}`} title={`${loginData.data.success ? 'Felicitations' : 'Attention'}`} body={loginData.data.message} />
                 )}
             </div>
             </div>
         </div>
-        {console.log(toto)}
     </section>
     );
 };
 
-const mapStateToProps = state => ({
-    isLogingIn: state.auth.isLogingIn,
-    auth: state.auth.result,
-    toto: state.auth.result,
-});
-
-export default connect(mapStateToProps)(SignupForm);
+export default SignupForm;

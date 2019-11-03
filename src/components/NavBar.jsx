@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuthentication } from '../auth.utils';
 
-const NavBar = () => {
+
+const NavBar = ({ result: { data: { isAuthenticated, data } =
+    { isAuthenticated: false, data: {} } } = {} }) => {
     const [active, setActive] = useState(false);
     const toggleBurger = () => setActive(!active);
-    const user = useAuthentication();
-
     return (
     <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
@@ -37,11 +36,11 @@ const NavBar = () => {
                     </div>
                 </div>
             </div>
-            <div className="navbar-item is-centered is-bold has-text-white has-text-weight-bold">Bonjour {user.isAuthenticated ? user.data.username : ''}</div>
+            <div className="navbar-item is-centered is-bold has-text-white has-text-weight-bold">Bonjour {data.username}</div>
 
             <div className="navbar-end">
             {
-                (user.isAuthenticated)
+                (isAuthenticated)
                 && (
                 <Link className="navbar-item" to="/elastictool">
                     ElasticSearch Admin
@@ -50,7 +49,7 @@ const NavBar = () => {
             }
                 <div className="navbar-item">
                     {
-                        (!user.isAuthenticated)
+                        (!isAuthenticated)
                         && (
                         <div className="buttons">
                         <Link className="button is-primary" to="/signup">Créer un compte</Link>
@@ -59,7 +58,7 @@ const NavBar = () => {
                         )
                     }
                     {
-                        (user.isAuthenticated)
+                        (isAuthenticated)
                         && (
                         <div className="buttons">
                         <Link className="button is-primary is-inverted is-outlined" to="/logout">Se Déconnecter</Link>

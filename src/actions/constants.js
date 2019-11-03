@@ -16,3 +16,5 @@ export const SEARCH_KO = 'SEARCH_KO';
 export const START_LOGIN = 'START_LOGIN';
 export const LOGIN_OK = 'LOGIN_OK';
 export const LOGIN_KO = 'LOGIN_KO';
+
+export const IS_AUTHENTICATED = 'IS_AUTHENTICATED';
