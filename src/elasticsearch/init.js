@@ -39,10 +39,8 @@ const updateDocument = (indexName, _id, docType, payload) => {
     body: payload,
   }, (error, response) => {
     if (error) {
-      console.error(`ERROR - updateDocument - ${indexName} , ${error}`);
       return error;
     }
-    console.log(`updateDocument : ${indexName}`);
     return response;
   });
 };

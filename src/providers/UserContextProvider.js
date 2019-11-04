@@ -1,32 +1,59 @@
-import React, { useReducer } from 'react';
-import { isAuthenticated } from '../auth.utils';
+import React, { useReducer, useEffect } from 'react';
+import { isAuthenticated, handleLogin } from '../auth.utils';
+import authReducer from '../reducers/authReducer';
 
 const UserContext = React.createContext();
-const reducer = (state, action) => {
-    switch (action.type) {
-        case 'IS_AUTHENTICATED':
-            return {
-                ...state,
-                result: action.result,
-            };
-        default:
-            return state;
-    }
-};
 
 const UserContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(reducer, {});
+    const [state, dispatch] = useReducer(authReducer, { isLoading: true });
 
-    isAuthenticated().then((result) => {
+    const checkAuth = (p) => {
+        useEffect(
+            () => {
+                isAuthenticated().then((result) => {
+                    dispatch({
+                        type: 'IS_AUTHENTICATED',
+                        result: result.data,
+                    });
+                });
+            }, [p],
+        );
+    };
+
+    const login = (values) => {
+        handleLogin(values).then((result) => {
+            if (result.data.success) {
+                localStorage.setItem('token', result.data.token);
+            }
+            dispatch({
+                type: 'LOGIN_OK',
+                result: result.data,
+            });
+        });
+    };
+
+    const logout = () => {
+        localStorage.removeItem('token');
         dispatch({
-            type: 'IS_AUTHENTICATED',
-            result });
-    });
+            type: 'LOGIN_OK',
+            result: {},
+        });
+    };
+
+    checkAuth();
+
+    const sharedState = {
+        ...state,
+        user: { ...state.user, handleLogin: login, logout, checkAuth },
+    };
+
     return (
-        <UserContext.Provider value={{ ...state }}>
+        <UserContext.Provider value={sharedState}>
             {children}
         </UserContext.Provider>
     );
 };
 
-export default UserContextProvider;
+const UserContextConsumer = UserContext.Consumer;
+
+export { UserContextProvider, UserContextConsumer };

@@ -3,7 +3,6 @@ import axios from 'axios';
 import * as config from './config';
 
 export const isAuthenticated = () => {
-    console.log('calling isAuthenticated');
     const jwt = localStorage.getItem('token');
     let options = {};
     if (jwt) {

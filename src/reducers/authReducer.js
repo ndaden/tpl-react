@@ -5,25 +5,25 @@ export default (state = {}, action) => {
         case Constants.START_LOGIN:
             return {
                 ...state,
-                isLogingIn: true,
+                isLoading: true,
             };
         case Constants.LOGIN_OK:
             return {
                 ...state,
-                isLogingIn: false,
+                isLoading: false,
                 loginData: action.result,
             };
         case Constants.LOGIN_KO:
             return {
                 ...state,
-                isLogingIn: false,
+                isLoading: false,
                 error: action.error,
             };
         case Constants.IS_AUTHENTICATED:
             return {
                 ...state,
-                isLogingIn: false,
-                result: action.result,
+                isLoading: false,
+                user: action.result,
             };
         default:
             return state;

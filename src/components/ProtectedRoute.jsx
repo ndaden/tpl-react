@@ -3,13 +3,12 @@ import { Route } from 'react-router-dom';
 
 import SignIn from './SignIn';
 
-const ProtectedRoute = ({ result:
-                { data: { isAuthenticated } = { isAuthenticated: false } } = {},
-                 ...props } = {}) => {
-    if (isAuthenticated) {
+const ProtectedRoute = (props) => {
+    const { user } = props;
+    if (user.isAuthenticated) {
         return <Route {...props} />;
     }
-    return <Route {...props} component={SignIn} />;
+    return <Route render={() => <SignIn {...props} />} />;
 };
 
 export default ProtectedRoute;

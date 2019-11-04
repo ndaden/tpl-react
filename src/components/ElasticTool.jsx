@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
     Ping,
@@ -29,7 +30,12 @@ const ElasticTool = (props) => {
         indexes,
         search,
         error,
+        user,
     } = props;
+
+    if (!user.isAuthenticated) {
+        return <Redirect to="/signin" />;
+    }
 
     useEffect(() => {
         dispatch(IndexList());

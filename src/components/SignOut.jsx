@@ -1,9 +1,10 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
-const SignOut = () => {
-    localStorage.removeItem('token');
-    window.location = '/';
+const SignOut = (props) => {
+    const { user } = props;
+    user.logout();
+    user.checkAuth();
     return <Redirect to="/" />;
 };
 

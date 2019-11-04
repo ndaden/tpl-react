@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 
-const NavBar = ({ result: { data: { isAuthenticated, data } =
-    { isAuthenticated: false, data: {} } } = {} }) => {
+const NavBar = ({ user }) => {
     const [active, setActive] = useState(false);
     const toggleBurger = () => setActive(!active);
+
     return (
     <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
@@ -36,11 +36,11 @@ const NavBar = ({ result: { data: { isAuthenticated, data } =
                     </div>
                 </div>
             </div>
-            <div className="navbar-item is-centered is-bold has-text-white has-text-weight-bold">Bonjour {data.username}</div>
+            <div className="navbar-item is-centered is-bold has-text-white has-text-weight-bold">Bonjour {user.data.username}</div>
 
             <div className="navbar-end">
             {
-                (isAuthenticated)
+                (user.isAuthenticated)
                 && (
                 <Link className="navbar-item" to="/elastictool">
                     ElasticSearch Admin
@@ -49,7 +49,7 @@ const NavBar = ({ result: { data: { isAuthenticated, data } =
             }
                 <div className="navbar-item">
                     {
-                        (!isAuthenticated)
+                        (!user.isAuthenticated)
                         && (
                         <div className="buttons">
                         <Link className="button is-primary" to="/signup">Créer un compte</Link>
@@ -58,7 +58,7 @@ const NavBar = ({ result: { data: { isAuthenticated, data } =
                         )
                     }
                     {
-                        (isAuthenticated)
+                        (user.isAuthenticated)
                         && (
                         <div className="buttons">
                         <Link className="button is-primary is-inverted is-outlined" to="/logout">Se Déconnecter</Link>

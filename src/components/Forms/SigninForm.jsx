@@ -9,22 +9,17 @@ import {
 import SignInSchema from './ValidationSchemas/SignInSchema';
 import NotificationCard from './NotificationCard';
 
-const SignupForm = (props) => {
-    const {
-        isLogingIn,
-        handleLogin,
-        loginData,
-        checkAuth,
-     } = props;
+const SignInForm = (props) => {
+    const { isLoading, user, loginData } = props;
 
     const submitSignInForm = (values) => {
-        handleLogin(values);
+        user.handleLogin(values);
     };
 
-    checkAuth(loginData);
+    user.checkAuth(loginData);
+
     return (
     <section className="section">
-    {console.log(loginData)}
         <div className="container">
             <div className="columns">
             <div className="column">
@@ -50,7 +45,7 @@ const SignupForm = (props) => {
                                 <ErrorMessage name="password" className="help is-danger" component="p" />
                             </div>
 
-                            <button type="submit" className="button is-success" disabled={isLogingIn}>
+                            <button type="submit" className="button is-success" disabled={isLoading}>
                                 Se connecter
                             </button>
                         </Form>
@@ -58,9 +53,9 @@ const SignupForm = (props) => {
                 </Formik>
             </div>
             <div className="column">
-            {loginData && loginData.data.message !== undefined
+            {loginData && loginData.message !== undefined
             && (
-                <NotificationCard type={`${loginData.data.success ? 'success' : 'error'}`} title={`${loginData.data.success ? 'Felicitations' : 'Attention'}`} body={loginData.data.message} />
+                <NotificationCard type={`${loginData.success ? 'success' : 'error'}`} title={`${loginData.success ? 'Felicitations' : 'Attention'}`} body={loginData.message} />
                 )}
             </div>
             </div>
@@ -69,4 +64,4 @@ const SignupForm = (props) => {
     );
 };
 
-export default SignupForm;
+export default SignInForm;
