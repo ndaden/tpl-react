@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import {
     ElasticTool,
     NavBar,
@@ -7,7 +7,8 @@ import {
     SignUp,
     SignOut,
     Footer,
-    Error,
+    Error404,
+    TechnicalError,
 } from './components';
 import { UserContext } from './providers/UserContextProvider';
 
@@ -37,14 +38,17 @@ const App = () => {
     return (
         <Router>
             <NavBar />
-            <Route path="/elastictool" component={ElasticTool} />
-            <Route path="/" exact component={Index} />
-            <Route path="/signin" component={SignIn} />
-            <Route path="/signup" component={SignUp} />
-            <Route path="/logout" component={SignOut} />
+            <Switch>
+            <Route path="/elastictool" exact component={ElasticTool} />
+            <Route path="/signin" exact component={SignIn} />
+            <Route path="/signup" exact component={SignUp} />
+            <Route path="/logout" exact component={SignOut} />
             <Route path="/toto" exact component={Toto} />
-            <Route path="/toto/:id/:name" component={Toto} />
-            <Route path="/error" component={Error} />
+            <Route path="/toto/:id/:name" exact component={Toto} />
+            <Route path="/error" exact component={TechnicalError} />
+            <Route path="/" exact component={Index} />
+            <Route component={Error404} />
+            </Switch>
             <Footer />
         </Router>
     );

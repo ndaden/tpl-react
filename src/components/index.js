@@ -5,7 +5,7 @@ import SignUp from './SignUp';
 import SignOut from './SignOut';
 import Footer from './Footer';
 import ProtectedRoute from './ProtectedRoute';
-import Error from './Error';
+import { Error404, TechnicalError } from './Error';
 
 export {
     NavBar,
@@ -15,5 +15,6 @@ export {
     SignOut,
     Footer,
     ProtectedRoute,
-    Error,
+    Error404,
+    TechnicalError,
 };
