@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../providers/UserContextProvider';
 
 
-const NavBar = ({ user }) => {
+const NavBar = () => {
+    const userContext = useContext(UserContext);
     const [active, setActive] = useState(false);
     const toggleBurger = () => setActive(!active);
 
+    const { user } = userContext;
     return (
     <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
@@ -21,18 +24,18 @@ const NavBar = ({ user }) => {
 
         <div className={`navbar-menu ${active ? 'is-active' : ''}`} id="nvmenu">
             <div className="navbar-start">
-                <Link className="navbar-item" to="/">
+                <Link className="navbar-item" to="/" onClick={toggleBurger}>
                     Home
                 </Link>
-                <Link className="navbar-item" to="/toto">
+                <Link className="navbar-item" to="/toto" onClick={toggleBurger}>
                     Toto
                 </Link>
 
                 <div className="navbar-item has-dropdown is-hoverable">
                     <a className="navbar-link">Autres</a>
                     <div className="navbar-dropdown">
-                        <Link className="navbar-item" to="">Truc</Link>
-                        <Link className="navbar-item" to="">Autre Truc</Link>
+                        <Link className="navbar-item" to="" onClick={toggleBurger}>Truc</Link>
+                        <Link className="navbar-item" to="" onClick={toggleBurger}>Autre Truc</Link>
                     </div>
                 </div>
             </div>
@@ -42,7 +45,7 @@ const NavBar = ({ user }) => {
             {
                 (user.isAuthenticated)
                 && (
-                <Link className="navbar-item" to="/elastictool">
+                <Link className="navbar-item" to="/elastictool" onClick={toggleBurger}>
                     ElasticSearch Admin
                 </Link>
                 )
@@ -52,8 +55,8 @@ const NavBar = ({ user }) => {
                         (!user.isAuthenticated)
                         && (
                         <div className="buttons">
-                        <Link className="button is-primary" to="/signup">Créer un compte</Link>
-                        <Link className="button is-light" to="/signin">Se connecter</Link>
+                        <Link className="button is-primary" to="/signup" onClick={toggleBurger}>Créer un compte</Link>
+                        <Link className="button is-light" to="/signin" onClick={toggleBurger}>Se connecter</Link>
                         </div>
                         )
                     }
@@ -61,7 +64,7 @@ const NavBar = ({ user }) => {
                         (user.isAuthenticated)
                         && (
                         <div className="buttons">
-                        <Link className="button is-primary is-inverted is-outlined" to="/logout">Se Déconnecter</Link>
+                        <Link className="button is-primary is-inverted is-outlined" to="/logout" onClick={toggleBurger}>Se Déconnecter</Link>
                         </div>
                         )
                     }

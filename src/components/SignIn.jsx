@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import SigninForm from './Forms/SigninForm';
+import { UserContext } from '../providers/UserContextProvider';
 
-const SignIn = (props) => {
-    const { user } = props;
-    if (user.isAuthenticated) {
+const SignIn = () => {
+    const userContext = useContext(UserContext);
+    const { user } = userContext;
+    if (user && user.isAuthenticated) {
         return <Redirect to="/" />;
     }
     return (
-        <SigninForm user {...props} />
+        <SigninForm />
     );
 };
 

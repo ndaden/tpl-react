@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
     Formik,
     Form,
@@ -9,8 +9,12 @@ import {
 import SignInSchema from './ValidationSchemas/SignInSchema';
 import NotificationCard from './NotificationCard';
 
-const SignInForm = (props) => {
-    const { isLoading, user, loginData } = props;
+import { UserContext } from '../../providers/UserContextProvider';
+
+const SignInForm = () => {
+    const userContext = useContext(UserContext);
+
+    const { isLoading, user, loginData } = userContext;
 
     const submitSignInForm = (values) => {
         user.handleLogin(values);

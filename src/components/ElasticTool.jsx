@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
@@ -11,6 +11,7 @@ import {
     SearchDocument,
     DeleteDocument,
 } from '../actions/dataActions';
+import { UserContext } from '../providers/UserContextProvider';
 import * as EsQuery from '../elasticsearch/query';
 
 const ElasticTool = (props) => {
@@ -30,9 +31,10 @@ const ElasticTool = (props) => {
         indexes,
         search,
         error,
-        user,
     } = props;
 
+    const userContext = useContext(UserContext);
+    const { user } = userContext;
     if (!user.isAuthenticated) {
         return <Redirect to="/signin" />;
     }

@@ -56,4 +56,4 @@ const UserContextProvider = ({ children }) => {
 
 const UserContextConsumer = UserContext.Consumer;
 
-export { UserContextProvider, UserContextConsumer };
+export { UserContextProvider, UserContextConsumer, UserContext };

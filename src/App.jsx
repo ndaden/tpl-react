@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import {
     ElasticTool,
@@ -9,11 +9,13 @@ import {
     Footer,
     Error,
 } from './components';
+import { UserContext } from './providers/UserContextProvider';
 
 const Index = () => {
     return (
         <div>
             <p>Bonjour tu es dans la page Index</p>
+            <span className="fa fa-spinner"> </span>
             <nav><Link to="/page1">Go to Page 1</Link></nav>
         </div>
     );
@@ -26,19 +28,20 @@ const Toto = ({ match = {} }) => (
     </div>
 );
 
-const App = (props) => {
-    const { isLoading } = props;
+const App = () => {
+    const userContext = useContext(UserContext);
+    const { isLoading } = userContext;
     if (isLoading) {
         return <h1>Loading... if the page does not display, please Reload</h1>;
     }
     return (
         <Router>
-            <NavBar {...props} />
-            <Route path="/elastictool" render={() => <ElasticTool {...props} />} />
+            <NavBar />
+            <Route path="/elastictool" component={ElasticTool} />
             <Route path="/" exact component={Index} />
-            <Route path="/signin" render={() => <SignIn {...props} />} />
-            <Route path="/signup" render={() => <SignUp {...props} />} />
-            <Route path="/logout" render={() => <SignOut {...props} />} />
+            <Route path="/signin" component={SignIn} />
+            <Route path="/signup" component={SignUp} />
+            <Route path="/logout" component={SignOut} />
             <Route path="/toto" exact component={Toto} />
             <Route path="/toto/:id/:name" component={Toto} />
             <Route path="/error" component={Error} />

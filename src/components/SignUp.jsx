@@ -1,12 +1,19 @@
-import React from 'react';
-import SignupForm from './Forms/SignupForm';
-import { useAuthentication } from '../auth.utils';
+import React, { useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 
-const SignIn = () => {
-    useAuthentication();
+import SignupForm from './Forms/SignupForm';
+import { UserContext } from '../providers/UserContextProvider';
+
+const SignUp = () => {
+    const userContext = useContext(UserContext);
+    const { user } = userContext;
+
+    if (user.isAuthenticated) {
+        return <Redirect to="/" />;
+    }
     return (
         <SignupForm />
     );
 };
 
-export default SignIn;
+export default SignUp;
