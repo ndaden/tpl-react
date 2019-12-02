@@ -9,6 +9,7 @@ import {
     Footer,
     Error404,
     TechnicalError,
+    ActivationForm,
 } from './components';
 import { UserContext } from './providers/UserContextProvider';
 
@@ -42,6 +43,7 @@ const App = () => {
             <Route path="/elastictool" exact component={ElasticTool} />
             <Route path="/signin" exact component={SignIn} />
             <Route path="/signup" exact component={SignUp} />
+            <Route path="/activate" exact component={ActivationForm} />
             <Route path="/logout" exact component={SignOut} />
             <Route path="/toto" exact component={Toto} />
             <Route path="/toto/:id/:name" exact component={Toto} />

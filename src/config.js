@@ -1,3 +1,4 @@
 export const API_URI = process.env.API_URI || 'http://localhost:3000';
 export const API_USERS = process.env.API_USERS || '/api/v1/users';
 export const API_AUTH = process.env.API_AUTH || '/api/auth';
+export const API_ACTIVATE = process.env.API_ACTIVATE || '/api/v1/users/activate';

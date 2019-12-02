@@ -25,6 +25,12 @@ export default (state = {}, action) => {
                 isLoading: false,
                 user: action.result,
             };
+        case Constants.ACTIVATION_OK:
+            return {
+                ...state,
+                isLoading: false,
+                activationData: action.result.data,
+            };
         default:
             return state;
     }

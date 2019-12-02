@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect } from 'react';
-import { isAuthenticated, handleLogin } from '../auth.utils';
+import { isAuthenticated, handleLogin, activateAccount } from '../auth.utils';
 import authReducer from '../reducers/authReducer';
 
 const UserContext = React.createContext();
@@ -32,6 +32,15 @@ const UserContextProvider = ({ children }) => {
         });
     };
 
+    const activate = (values) => {
+        activateAccount(values).then((result) => {
+            dispatch({
+                type: 'ACTIVATION_OK',
+                result,
+            });
+        });
+    };
+
     const logout = () => {
         localStorage.removeItem('token');
         dispatch({
@@ -44,7 +53,13 @@ const UserContextProvider = ({ children }) => {
 
     const sharedState = {
         ...state,
-        user: { ...state.user, handleLogin: login, logout, checkAuth },
+        user: {
+            ...state.user,
+            activationData: state.activationData,
+            handleLogin: login,
+            logout,
+            checkAuth,
+            activate },
     };
 
     return (

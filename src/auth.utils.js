@@ -38,3 +38,5 @@ export const useAuthentication = () => {
 };
 
 export const handleLogin = values => axios.post(`${config.API_URI}${config.API_AUTH}`, values);
+
+export const activateAccount = values => axios.post(`${config.API_URI}${config.API_ACTIVATE}`, values);

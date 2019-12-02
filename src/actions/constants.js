@@ -18,3 +18,4 @@ export const LOGIN_OK = 'LOGIN_OK';
 export const LOGIN_KO = 'LOGIN_KO';
 
 export const IS_AUTHENTICATED = 'IS_AUTHENTICATED';
+export const ACTIVATION_OK = 'ACTIVATION_OK';
