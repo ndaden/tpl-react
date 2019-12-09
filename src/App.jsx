@@ -10,6 +10,7 @@ import {
     Error404,
     TechnicalError,
     ActivationForm,
+    ProtectedRoute,
 } from './components';
 import { UserContext } from './providers/UserContextProvider';
 
@@ -40,7 +41,7 @@ const App = () => {
         <Router>
             <NavBar />
             <Switch>
-            <Route path="/elastictool" exact component={ElasticTool} />
+            <ProtectedRoute path="/elastictool" exact component={ElasticTool} rejectMessage="Vous devez avoir un compte actif pour acceder à cette page. pour cela saisissez le code envoyé par e-mail." />
             <Route path="/signin" exact component={SignIn} />
             <Route path="/signup" exact component={SignUp} />
             <Route path="/activate" exact component={ActivationForm} />

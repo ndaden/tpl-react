@@ -1,14 +1,18 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
-import SignIn from './SignIn';
+import { UserContext } from '../providers/UserContextProvider';
 
 const ProtectedRoute = (props) => {
-    const { user } = props;
+    const userContext = useContext(UserContext);
+    const { user } = userContext;
     if (user.isAuthenticated) {
+        if (!user.data.isActive) {
+            return <Redirect to={{ pathname: '/activate', state: { rejectMessage: props.rejectMessage } }} />;
+        }
         return <Route {...props} />;
     }
-    return <Route render={() => <SignIn {...props} />} />;
+    return <Redirect to="/signin" />;
 };
 
 export default ProtectedRoute;

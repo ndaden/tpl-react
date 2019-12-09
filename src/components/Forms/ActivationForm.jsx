@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import {
     Formik,
     Form,
@@ -11,23 +12,34 @@ import NotificationCard from './NotificationCard';
 
 import { UserContext } from '../../providers/UserContextProvider';
 
-const ActivationForm = () => {
+const ActivationForm = (props) => {
     const userContext = useContext(UserContext);
 
     const { isLoading, user } = userContext;
 
+    const { location: { state: { rejectMessage = '' } = {} } = {} } = props;
+
     const submitActivationCode = (values) => {
         user.activate(values);
-        console.log(user);
+        user.refreshAuth();
     };
+
+    const reSendActivationCode = () => {
+        user.activate({ email: user.data.email, renew: true });
+    };
+
+    if (!user.isAuthenticated) {
+        return <Redirect to="/Signin" />;
+    }
 
     return (
     <section className="section">
     <div className="container">
+    {rejectMessage && <NotificationCard type="error" title="Activez votre compte !" body={rejectMessage} />}
         <div className="columns">
         <div className="column">
             <Formik
-              initialValues={{ email: user.data.email, activationCode: '' }}
+              initialValues={{ email: user.data.email, activationCode: '', renew: false }}
               validationSchema={ActivationSchema}
               onSubmit={submitActivationCode}>
                 {({ errors, touched }) => (
@@ -39,10 +51,24 @@ const ActivationForm = () => {
                             </div>
                             <ErrorMessage name="activationCode" className="help is-danger" component="p" />
                         </div>
-
+                        <div className="field is-grouped">
+                        <div className="control">
                         <button type="submit" className="button is-success" disabled={isLoading}>
-                            Activer mon compte
+                        <span className="icon is-small is-left">
+                            <i className="fas fa-check-circle"> </i>
+                        </span>
+                        <span>Activer mon compte</span>
                         </button>
+                        </div>
+                        <div className="control">
+                            <button className="button is-link" onClick={reSendActivationCode}>
+                            <span className="icon is-small is-left">
+                            <i className="fas fa-redo"> </i>
+                            </span>
+                            <span>Re-envoyer le code</span>
+                            </button>
+                        </div>
+                        </div>
                     </Form>
                 )}
             </Formik>

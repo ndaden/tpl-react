@@ -39,8 +39,6 @@ const NavBar = () => {
                     </div>
                 </div>
             </div>
-            <div className="navbar-item is-centered is-bold has-text-white has-text-weight-bold">Bonjour {user.data.username}</div>
-
             <div className="navbar-end">
             {
                 (user.isAuthenticated)
@@ -50,13 +48,27 @@ const NavBar = () => {
                 </Link>
                 )
             }
+            {(user.isAuthenticated)
+                && (
+                    <Link className="navbar-item" to="/profile" onClick={toggleBurger}>
+                        <span className="icon is-medium is-left">
+                            <i className="is-medium fas fa-user-circle"> </i>
+                        </span>
+                        <span>{`${user.data.username}`}</span>
+                    </Link>
+            )}
                 <div className="navbar-item">
                     {
                         (!user.isAuthenticated)
                         && (
                         <div className="buttons">
                         <Link className="button is-primary" to="/signup" onClick={toggleBurger}>Créer un compte</Link>
-                        <Link className="button is-light" to="/signin" onClick={toggleBurger}>Se connecter</Link>
+                        <Link className="button is-light" to="/signin" onClick={toggleBurger}>
+                        <span className="icon is-small is-left">
+                            <i className="fas fa-sign-in-alt"> </i>
+                        </span>
+                        <span>Se connecter</span>
+                        </Link>
                         </div>
                         )
                     }
@@ -64,16 +76,14 @@ const NavBar = () => {
                         (user.isAuthenticated)
                         && (
                         <div className="buttons">
-                        <Link className="button is-primary is-inverted is-outlined" to="/logout" onClick={toggleBurger}>Se Déconnecter</Link>
+                        <Link className="button is-outlined" to="/logout" onClick={toggleBurger}>
+                        <span className="icon is-small is-left">
+                            <i className="fas fa-sign-out-alt"> </i>
+                        </span>
+                        </Link>
                         </div>
                         )
                     }
-                </div>
-                <div className="navbar-item">
-                    <div className="tags has-addons are-normal">
-                            <span className="tag">version</span>
-                            <span className="tag is-black">0.1</span>
-                    </div>
                 </div>
             </div>
         </div>

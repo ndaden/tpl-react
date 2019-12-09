@@ -7,6 +7,9 @@ const SignIn = () => {
     const userContext = useContext(UserContext);
     const { user } = userContext;
     if (user && user.isAuthenticated) {
+        if (!user.data.isActive) {
+            return <Redirect to="/activate" />;
+        }
         return <Redirect to="/" />;
     }
     return (

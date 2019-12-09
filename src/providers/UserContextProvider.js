@@ -20,6 +20,15 @@ const UserContextProvider = ({ children }) => {
         );
     };
 
+    const refreshAuth = () => {
+        isAuthenticated().then((result) => {
+            dispatch({
+                type: 'IS_AUTHENTICATED',
+                result: result.data,
+            });
+        });
+    };
+
     const login = (values) => {
         handleLogin(values).then((result) => {
             if (result.data.success) {
@@ -59,6 +68,7 @@ const UserContextProvider = ({ children }) => {
             handleLogin: login,
             logout,
             checkAuth,
+            refreshAuth,
             activate },
     };
 
