@@ -2,6 +2,7 @@ import NavBar from './NavBar';
 import ElasticTool from './ElasticTool';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import Profile from './Profile';
 import ActivationForm from './Forms/ActivationForm';
 import SignOut from './SignOut';
 import Footer from './Footer';
@@ -14,6 +15,7 @@ export {
     SignIn,
     SignUp,
     SignOut,
+    Profile,
     ActivationForm,
     Footer,
     ProtectedRoute,

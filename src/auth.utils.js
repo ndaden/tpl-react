@@ -40,3 +40,15 @@ export const useAuthentication = () => {
 export const handleLogin = values => axios.post(`${config.API_URI}${config.API_AUTH}`, values);
 
 export const activateAccount = values => axios.post(`${config.API_URI}${config.API_ACTIVATE}`, values);
+
+export const uploadProfilePicture = (token, values) => {
+    const options = {
+        url: `${config.API_URI}${config.API_UPLOAD_PROFILE_PICTURE}`,
+        method: 'POST',
+        data: values,
+        headers: {
+            Authorization: `Bearer ${token}`,
+         },
+    };
+    return axios(options);
+};

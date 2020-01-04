@@ -6,6 +6,7 @@ import {
     SignIn,
     SignUp,
     SignOut,
+    Profile,
     Footer,
     Error404,
     TechnicalError,
@@ -44,6 +45,7 @@ const App = () => {
             <ProtectedRoute path="/elastictool" exact component={ElasticTool} rejectMessage="Vous devez avoir un compte actif pour acceder à cette page. pour cela saisissez le code envoyé par e-mail." />
             <Route path="/signin" exact component={SignIn} />
             <Route path="/signup" exact component={SignUp} />
+            <Route path="/profile" exact component={Profile} />
             <Route path="/activate" exact component={ActivationForm} />
             <Route path="/logout" exact component={SignOut} />
             <Route path="/toto" exact component={Toto} />
