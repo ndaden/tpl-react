@@ -14,13 +14,17 @@ const Profile = () => {
     const submitProfilePicture = (values) => {
         const formData = new FormData();
         formData.append('avatar', values.avatar);
-        user.uploadProfilePicture(localStorage.getItem('token'), formData);
+        return user.uploadProfilePicture(localStorage.getItem('token'), formData).then(() => {
+            user.refreshAuth();
+        });
     };
 
-    const AutoSubmitForm = ({ values, submitForm }) => {
+    const AutoSubmitForm = ({ values, submitForm, setFieldValue }) => {
         useEffect(() => {
-            submitForm();
-        }, [values, submitForm]);
+            if (values.avatar) {
+                submitForm().then(() => { setFieldValue('avatar', null); });
+            }
+        }, [values.avatar != null]);
 
         return null;
     };
@@ -32,7 +36,7 @@ const Profile = () => {
                     <div className="column is-one-third">
                         <div className="content">
                             <figure className="image is-128x128">
-                                <img className="is-rounded" alt="profile" src="" />
+                                <img className="is-rounded" alt="profile" src={`${user.data.avatarUrl}`} />
                             </figure>
                             <Formik
                               initialValues={{ avatar: null }}
@@ -67,7 +71,10 @@ const Profile = () => {
                                             </div>
                                         </div>
                                     </Form>
-                                    <AutoSubmitForm values={values} submitForm={submitForm} />
+                                    <AutoSubmitForm
+                                      values={values}
+                                      submitForm={submitForm}
+                                      setFieldValue={setFieldValue} />
                                     </div>
                                 )}
                             </Formik>
