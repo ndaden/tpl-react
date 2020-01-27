@@ -4,6 +4,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Profile from './Profile';
 import ActivationForm from './Forms/ActivationForm';
+import EditPasswordForm from './Forms/EditPassword';
 import SignOut from './SignOut';
 import Footer from './Footer';
 import ProtectedRoute from './ProtectedRoute';
@@ -15,6 +16,7 @@ export {
     SignIn,
     SignUp,
     SignOut,
+    EditPasswordForm,
     Profile,
     ActivationForm,
     Footer,

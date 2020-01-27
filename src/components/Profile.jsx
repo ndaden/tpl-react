@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
     Formik,
     Form,
@@ -84,7 +85,7 @@ const Profile = () => {
                         <div className="content">
                             <p>Nom d&apos;utilisateur : {`${user.data.username}`}</p>
                             <p>Adresse e-mail : {`${user.data.email}`}</p>
-                            <p>Mot de passe : <a href="/">Modifier</a></p>
+                            <p>Mot de passe : ************** <Link to="/password">Changer</Link></p>
                         </div>
                     </div>
                 </div>
