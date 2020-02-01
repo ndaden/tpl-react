@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
     Formik,
     Form,
@@ -13,12 +13,14 @@ import { UserContext } from '../../providers/UserContextProvider';
 
 const EditPassword = () => {
     const userContext = useContext(UserContext);
+    const [result, setResult] = useState({});
 
     const { isLoading, user, loginData } = userContext;
 
     const submitChangePasswordForm = (values) => {
-        console.log(values);
-        // TODO: call backend
+        user.changePassword(localStorage.getItem('token'), values).then((res) => {
+            setResult(res.data);
+        }).catch(error => setResult(error.response.data));
     };
 
     user.checkAuth(loginData);
@@ -66,9 +68,9 @@ const EditPassword = () => {
                 </Formik>
             </div>
             <div className="column">
-            {loginData && loginData.message !== undefined
+            {result && result.message !== undefined
             && (
-                <NotificationCard type={`${loginData.success ? 'success' : 'error'}`} title={`${loginData.success ? 'Felicitations' : 'Attention'}`} body={loginData.message} />
+                <NotificationCard type={`${result.success ? 'success' : 'error'}`} title={`${result.success ? 'Felicitations' : 'Attention'}`} body={result.message} />
                 )}
             </div>
             </div>

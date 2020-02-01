@@ -7,7 +7,7 @@ const ProtectedRoute = (props) => {
     const userContext = useContext(UserContext);
     const { user } = userContext;
     if (user.isAuthenticated) {
-        if (!user.data.isActive) {
+        if (props.checkActive && !user.data.isActive) {
             return <Redirect to={{ pathname: '/activate', state: { rejectMessage: props.rejectMessage } }} />;
         }
         return <Route {...props} />;

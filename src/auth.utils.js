@@ -41,6 +41,18 @@ export const handleLogin = values => axios.post(`${config.API_URI}${config.API_A
 
 export const activateAccount = values => axios.post(`${config.API_URI}${config.API_ACTIVATE}`, values);
 
+export const changePassword = (token, values) => {
+    const options = {
+        url: `${config.API_URI}${config.API_CHANGE_PASSWORD}`,
+        method: 'POST',
+        data: values,
+        headers: {
+            Authorization: `Bearer ${token}`,
+         },
+    };
+    return axios(options);
+};
+
 export const uploadProfilePicture = (token, values) => {
     const options = {
         url: `${config.API_URI}${config.API_UPLOAD_PROFILE_PICTURE}`,

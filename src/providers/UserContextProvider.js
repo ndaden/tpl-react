@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect } from 'react';
-import { isAuthenticated, handleLogin, activateAccount, uploadProfilePicture } from '../auth.utils';
+import { isAuthenticated, handleLogin, activateAccount, uploadProfilePicture, changePassword } from '../auth.utils';
 import authReducer from '../reducers/authReducer';
 
 const UserContext = React.createContext();
@@ -70,7 +70,8 @@ const UserContextProvider = ({ children }) => {
             uploadProfilePicture,
             checkAuth,
             refreshAuth,
-            activate },
+            activate,
+            changePassword },
     };
 
     return (
