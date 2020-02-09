@@ -5,3 +5,4 @@ export const API_ACTIVATE = process.env.API_ACTIVATE || '/api/v1/users/activate'
 export const API_CHANGE_PASSWORD = process.env.API_CHANGE_PASSWORD || '/api/v1/users/edit/password';
 export const API_UPLOAD_PROFILE_PICTURE = process.env.API_UPLOAD_PROFILE_PICTURE || '/api/v1/users/edit/avatar';
 export const API_READ_PROFILE_PICTURE = process.env.API_READ_PROFILE_PICTURE || '/api/v1/file';
+export const API_OCR = process.env.API_OCR || '/api/v1/ocr';
