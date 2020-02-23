@@ -9,7 +9,6 @@ import {
     EditPasswordForm,
     Profile,
     Footer,
-    ImageReader,
     Error404,
     TechnicalError,
     ActivationForm,
@@ -51,7 +50,6 @@ const App = () => {
             <ProtectedRoute path="/profile" exact component={Profile} />
             <Route path="/activate" exact component={ActivationForm} />
             <Route path="/logout" exact component={SignOut} />
-            <Route path="/ocr" exact component={ImageReader} />
             <Route path="/toto" exact component={Toto} />
             <Route path="/toto/:id/:name" exact component={Toto} />
             <Route path="/error" exact component={TechnicalError} />

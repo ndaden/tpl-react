@@ -6,7 +6,6 @@ import Profile from './Profile';
 import ActivationForm from './Forms/ActivationForm';
 import EditPasswordForm from './Forms/EditPassword';
 import SignOut from './SignOut';
-import ImageReader from './ImageReader';
 import Footer from './Footer';
 import ProtectedRoute from './ProtectedRoute';
 import { Error404, TechnicalError } from './Error';
@@ -20,7 +19,6 @@ export {
     EditPasswordForm,
     Profile,
     ActivationForm,
-    ImageReader,
     Footer,
     ProtectedRoute,
     Error404,
